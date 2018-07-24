@@ -8,3 +8,9 @@ body {
 #map {
   height: 100%;
 }
+
+img {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}
