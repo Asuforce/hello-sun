@@ -4,24 +4,22 @@
   <title>Hello, Sun!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <link rel="stylesheet" href="./style.css" charset="utf-8" />
+  <link rel="stylesheet" href="style.css" charset="utf-8" />
 </head>
 
 <body>
-  <div id="app">
-    <img src="./obake.jpg" alt="obake" />
-    <h3>Hello, {{name}} san</h3>
-    <div id="profilepicturediv"></div>
-    <p>Where are you going ?</p>
-    <input type="text" v-model="place">
-    <button v-on:click="sendPlace">Let's go</button>
-
-  </div>
+  <img src="obake.jpg" alt="obake" />
+  <h3>Hello,
+    <span id="name"></span> san
+  </h3>
+  <div id="picture"></div>
+  <p>Where are you going ?</p>
+  <input type="text">
+  <button>Let's go</button>
 </body>
 
 <footer>
   <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
   <script src="index.js"></script>
 </footer>
 
