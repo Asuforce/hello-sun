@@ -15,6 +15,7 @@ function initializeApp(data) {
     var img = document.createElement('img');
     img.src = profile.pictureUrl;
     img.alt = "Profile Picture";
+    img.classList.add("icon");
     picture.appendChild(img);
   }).catch(function (error) {
     window.alert("Error getting profile: " + error);
