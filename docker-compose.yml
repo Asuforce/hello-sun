@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  web:
+    image: nginx
+    ports:
+      - 8888:80
+    privileged: true
+    volumes:
+      - "./:/usr/share/nginx/html"
+    container_name: "web"
