@@ -5,8 +5,11 @@ window.onload = function (e) {
 };
 
 function initializeApp(data) {
+  var name;
+
   liff.getProfile().then(function (profile) {
-    document.getElementById('name').textContent = profile.displayName;
+    name = profile.displayName;
+    document.getElementById('name').textContent = name;
 
     var picture = document.getElementById('picture');
     if (picture.firstElementChild) {
@@ -20,13 +23,38 @@ function initializeApp(data) {
   }).catch(function (error) {
     window.alert("Error getting profile: " + error);
   })
+
+  document.getElementById('share').addEventListener('click', function () {
+    liff.sendMessages([{
+      type: "location",
+      title: "Hello, " + name + " san",
+      address: address,
+      latitude: marker.getPosition().lat(),
+      longitude: marker.getPosition().lng()
+    }]).then(function () {
+      window.alert("Message sent");
+    }).catch(function (error) {
+      window.alert("Error sending message: " + error);
+    });
+  });
 }
 
 var map;
+var marker;
+var address;
 function initMap() {
+  var position = {
+    lat: 35.709, lng: 139.731
+  };
+
   map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 35.709, lng: 139.731 },
+    center: position,
     zoom: 7
+  });
+
+  marker = new google.maps.Marker({
+    map: map,
+    position: position
   });
 }
 
@@ -45,11 +73,7 @@ var getMap = (function () {
     geocoder.geocode({ 'address': address, 'region': 'jp' }, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
-
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
+        marker.setPosition(results[0].geometry.location);
       } else {
         window.alert("入力された場所が見つかりませんでした。");
       }
@@ -61,7 +85,7 @@ var getMap = (function () {
       var button = document.getElementById("button");
 
       button.onclick = function () {
-        var address = document.getElementById("address").value;
+        address = document.getElementById("address").value;
 
         if (address) {
           codeAddress(address);
