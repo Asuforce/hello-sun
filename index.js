@@ -30,7 +30,7 @@ var getMap = (function () {
     geocoder.geocode({ 'address': code, 'region': 'jp' }, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setZoom(18);
-        map.setCenter(results[0].geometry.location);
+        map.panTo(results[0].geometry.location);
         marker.setPosition(results[0].geometry.location);
       } else {
         adress = "";
