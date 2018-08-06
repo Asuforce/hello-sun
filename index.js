@@ -24,23 +24,17 @@ function initMap() {
 }
 
 var getMap = (function () {
-  function codeAddress(address) {
+  function codeAddress(code) {
     var geocoder = new google.maps.Geocoder();
 
-    var mapOptions = {
-      zoom: 18,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false
-    };
-
-    map.setZoom(18);
-
-    geocoder.geocode({ 'address': address, 'region': 'jp' }, function (results, status) {
+    geocoder.geocode({ 'address': code, 'region': 'jp' }, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
+        map.setZoom(18);
         map.setCenter(results[0].geometry.location);
         marker.setPosition(results[0].geometry.location);
       } else {
-        window.alert("入力された場所が見つかりませんでした。");
+        adress = "";
+        window.alert(status);
       }
     });
   }
