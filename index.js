@@ -4,41 +4,6 @@ window.onload = function (e) {
   });
 };
 
-function initializeApp(data) {
-  var name;
-
-  liff.getProfile().then(function (profile) {
-    name = profile.displayName;
-    document.getElementById('name').textContent = name;
-
-    var picture = document.getElementById('picture');
-    if (picture.firstElementChild) {
-      picture.removeChild(picture.firstElementChild);
-    }
-    var img = document.createElement('img');
-    img.src = profile.pictureUrl;
-    img.alt = "Profile Picture";
-    img.classList.add("icon");
-    picture.appendChild(img);
-  }).catch(function (error) {
-    window.alert("Error getting profile: " + error);
-  })
-
-  document.getElementById('share').addEventListener('click', function () {
-    liff.sendMessages([{
-      type: "location",
-      title: "Hello, " + name + " san",
-      address: address,
-      latitude: marker.getPosition().lat(),
-      longitude: marker.getPosition().lng()
-    }]).then(function () {
-      window.alert("Message sent");
-    }).catch(function (error) {
-      window.alert("Error sending message: " + error);
-    });
-  });
-}
-
 var map;
 var marker;
 var address;
@@ -98,3 +63,38 @@ var getMap = (function () {
 })();
 
 getMap.getAddress();
+
+function initializeApp(data) {
+  var name;
+
+  liff.getProfile().then(function (profile) {
+    name = profile.displayName;
+    document.getElementById('name').textContent = name;
+
+    var picture = document.getElementById('picture');
+    if (picture.firstElementChild) {
+      picture.removeChild(picture.firstElementChild);
+    }
+    var img = document.createElement('img');
+    img.src = profile.pictureUrl;
+    img.alt = "Profile Picture";
+    img.classList.add("icon");
+    picture.appendChild(img);
+  }).catch(function (error) {
+    window.alert("Error getting profile: " + error);
+  })
+
+  document.getElementById('share').addEventListener('click', function () {
+    liff.sendMessages([{
+      type: "location",
+      title: "Hello, " + name + " san",
+      address: address,
+      latitude: marker.getPosition().lat(),
+      longitude: marker.getPosition().lng()
+    }]).then(function () {
+      window.alert("Message sent");
+    }).catch(function (error) {
+      window.alert("Error sending message: " + error);
+    });
+  });
+}
