@@ -1,3 +1,3 @@
 # Hello, Sun
 
-Sun に行きたい場所を伝えると、 GoogleMap で教えてくれる地図
+LINE と GoogleMap を連携し、行きたい場所をトークルームに共有できる LIFF app
